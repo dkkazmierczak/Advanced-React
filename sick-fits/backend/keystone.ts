@@ -1,3 +1,4 @@
+import { User } from "./schemas/User"
 import "dotenv/config"
 import { config, createSchema } from "@keystone-next/keystone/schema"
 
@@ -23,6 +24,7 @@ export default config({
   },
   lists: createSchema({
     // Schema items go in here
+    User,
   }),
   ui: {
     isAccessAllowed: () => true,
