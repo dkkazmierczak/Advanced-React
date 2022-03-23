@@ -33,18 +33,18 @@ const HeaderStyles = styled.header`
   }
 `;
 
-const Header = () => (
-  <HeaderStyles>
-    <div className="bar">
-      <Logo>
-        <Link href="/">Sick fits</Link>
-      </Logo>
-    </div>
-    <div className="sub-bar">
-      <p>Search</p>
-    </div>
-    <Nav />
-  </HeaderStyles>
-);
-
-export default Header;
+export default function Header() {
+  return (
+    <HeaderStyles>
+      <div className="bar">
+        <Logo>
+          <Link href="/">Sick fits</Link>
+        </Logo>
+      </div>
+      <div className="sub-bar">
+        <p>Search</p>
+      </div>
+      <Nav />
+    </HeaderStyles>
+  );
+}

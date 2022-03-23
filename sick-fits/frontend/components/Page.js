@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from './Header';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'radnika_next' ;
     src: url( '/static/radnikanext-medium-webfont.woff2')
@@ -12,16 +12,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    --red: #ff000;
+    --red: #FF0000;
     --black: #393939;
-    --grey: #3a3a3a;
+    --grey: #3A3A3A;
     --gray: var(--grey);
     --lightGrey: #e1e1e1;
     --lightGray: var(--lightGrey);
     --offWhite: #ededed;
     --maxWidth: 1000px;
-    --bs: 0 12px 24px 0 (0,0,0,0.09);
+    --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
     box-sizing: border-box;
+    font-size: 62.5%;
   }
 
   *, *:before, *:after {
@@ -56,16 +57,16 @@ const InnerStyles = styled.div`
   padding: 2rem;
 `;
 
-const Page = ({ children }) => (
-  <div>
-    <GlobalStyle />
-    <Header />
-    <InnerStyles> {children}</InnerStyles>
-  </div>
-);
+export default function Page({ children }) {
+  return (
+    <div>
+      <GlobalStyles />
+      <Header />
+      <InnerStyles> {children}</InnerStyles>
+    </div>
+  );
+}
 
 Page.propTypes = {
   children: PropTypes.any,
 };
-
-export default Page;
