@@ -25,9 +25,9 @@ const UPDATE_PRODUCT_MUTATION = gql`
   mutation UPDATE_PRODUCT_MUTATION(
     #which variables are getting passed in? and what types are they?
     $id: ID!
-    $name: String!
-    $description: String!
-    $price: Int!
+    $name: String
+    $description: String
+    $price: Int
   ) {
     updateProduct(
       id: $id
@@ -42,35 +42,35 @@ const UPDATE_PRODUCT_MUTATION = gql`
 `;
 
 export default function UpdateProduct({ id }) {
-  // We need to get the exsiting product
+  // 1. We need to get the existing product
   const { data, loading, error } = useQuery(SINGLE_PRODUCT_QUERY, {
-    variables: {
-      id,
-    },
+    variables: { id },
   });
-  // We need to get the mutation to update the product
+
+  // 2. We need to get the mutation to update the product
   const [
     updateProduct,
     { loading: updateLoading, error: updateError, data: updateData },
   ] = useMutation(UPDATE_PRODUCT_MUTATION);
 
-  // Create some state for the form inputs
+  // 2.5 Create some state for the form inputs
   const { inputs, handleChange, clearForm, resetForm } = useForm(data?.Product);
   if (loading) return <p>Loading...</p>;
 
-  // We need the form to handle the updates
+  // 3. We need the form to handle the updates
   return (
     <Form
       onSubmit={async (e) => {
         e.preventDefault();
-        await updateProduct({
+        const res = await updateProduct({
           variables: {
             id,
             name: inputs.name,
             description: inputs.description,
             price: inputs.price,
           },
-        });
+        }).catch(console.error);
+        console.log(res);
         // TODO: handle submit
 
         // Submit the input fields to the backend
